@@ -8,7 +8,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-lg font-bold text-foreground mb-4">Aura</h3>
+            <h3 className="text-lg font-bold text-foreground mb-4">Galatea</h3>
             <p className="text-muted-foreground">Tu compañera virtual inteligente</p>
           </div>
           <div>
@@ -60,12 +60,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition">
+                <a href="#" className="hover:text-primary transition">
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition">
+                <a href="#" className="hover:text-primary transition">
                   Instagram
                 </a>
               </li>
@@ -74,9 +74,9 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">© 2025 Aura. Todos los derechos reservados.</p>
+          <p className="text-muted-foreground text-sm">© 2025 GalateaLabs. Todos los derechos reservados.</p>
           <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            Hecho con <Heart size={16} className="text-accent" /> para conectar
+            Hecho con <Heart size={16} className="text-primary" /> para conectar
           </div>
         </div>
       </div>

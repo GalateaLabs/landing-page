@@ -14,14 +14,20 @@ export function Header() {
           {/* Logo */}
           <div className="shrink-0">
             <div className="text-2xl font-bold text-accent">
-              <span className="bg-linear-to-r from-accent via-orange-400 to-orange-500 bg-clip-text text-transparent">
-                Aura
+              <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+                Galatea
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8 items-center">
+            <a
+              href="#features"
+              className="text-foreground hover:text-primary transition"
+            >
+            Galatea's Myth
+            </a>
             <a
               href="#features"
               className="text-foreground hover:text-accent transition"
@@ -35,13 +41,13 @@ export function Header() {
               Beneficios
             </a>
             <a
-              href="#pricing"
+              href="#"
               className="text-foreground hover:text-accent transition"
             >
-              Precios
+              Blog
             </a>
-            <button className="bg-accent text-accent-foreground px-6 py-2 rounded-full hover:opacity-90 transition">
-              Comenzar
+            <button className="bg-linear-to-r from-primary to-accent text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer button-shadow">
+              Regístrate
             </button>
 
             <ThemeToggle />

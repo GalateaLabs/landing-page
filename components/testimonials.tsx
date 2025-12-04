@@ -42,7 +42,7 @@ export function Testimonials() {
             <div key={i} className="bg-card border border-border rounded-2xl p-8 hover:shadow-lg transition-all">
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, j) => (
-                  <Star key={j} size={20} className="fill-accent text-accent" />
+                  <Star key={j} size={20} className="fill-primary text-primary" />
                 ))}
               </div>
               <p className="text-foreground mb-6 leading-relaxed">"{testimonial.content}"</p>
