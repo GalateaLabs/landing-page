@@ -114,12 +114,12 @@ export function Footer() {
                 </li>
                 <li>
                   <a href="#" className="hover:text-primary transition">
-                    Reddit
+                    Discord
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-primary transition">
-                    X
+                    Reddit
                   </a>
                 </li>
               </ul>

@@ -3,11 +3,14 @@
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import { db } from "@/lib/firebase";
+import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 export function CTA() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,15 +32,30 @@ export function CTA() {
     }
 
     setIsSubmitting(true);
-    // Aquí puedes agregar la lógica para enviar el email
-    console.log("Email registrado:", email);
-    
-    // Submission simulation
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert("Thank you for signing up!");
+
+    try {
+      // Guardar email en Firebase Firestore
+      const waitlistRef = collection(db, "waitlist");
+      const emailDoc = doc(waitlistRef, email.toLowerCase());
+      
+      await setDoc(emailDoc, {
+        email: email.toLowerCase(),
+        createdAt: serverTimestamp(),
+        source: "landing-page",
+      });
+
+      console.log("Email registrado en Firebase:", email);
+      setIsSuccess(true);
       setEmail("");
-    }, 1000);
+      
+      // Resetear mensaje de éxito después de 5 segundos
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (err) {
+      console.error("Error al guardar email:", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -56,31 +74,43 @@ export function CTA() {
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
           {/* Formulario de registro */}
           <div className="w-full max-w-md">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setError("");
-                  }}
-                  placeholder="your@email.com"
-                  className="w-full px-4 py-3 rounded-lg border border-foreground/20 bg-background text-foreground placeholder:text-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                />
-                {error && (
-                  <p className="text-red-500 text-sm mt-2">{error}</p>
-                )}
+            {isSuccess ? (
+              <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
+                <p className="text-green-500 font-semibold">
+                  🎉 Thank you for joining the waitlist!
+                </p>
+                <p className="text-foreground/70 text-sm mt-1">
+                  We&apos;ll be in touch soon.
+                </p>
               </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-linear-to-r from-primary to-accent text-white rounded-full font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 button-shadow"
-              >
-                {isSubmitting ? "Signing up..." : "Sign Up"}
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <input
+                    id="waitlist-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setError("");
+                    }}
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 rounded-lg border border-foreground/20 bg-background text-foreground placeholder:text-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                  {error && (
+                    <p className="text-red-500 text-sm mt-2">{error}</p>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-3 bg-linear-to-r from-primary to-accent text-white rounded-full font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 button-shadow"
+                >
+                  {isSubmitting ? "Joining..." : "Join the waitlist"}
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </form>
+            )}
           </div>
 
           {/* Imagen */}

@@ -35,7 +35,16 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="bg-linear-to-r from-primary to-accent text-white px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 cursor-pointer button-shadow">
+              <button
+                onClick={() => {
+                  const emailInput = document.getElementById('waitlist-email');
+                  if (emailInput) {
+                    emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(() => emailInput.focus(), 500);
+                  }
+                }}
+                className="bg-linear-to-r from-primary to-accent text-white px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 cursor-pointer button-shadow"
+              >
                 Meet Yours
                 <ArrowRight size={20} />
               </button>

@@ -15,7 +15,7 @@ export function Header() {
           <div className="shrink-0">
             <div className="text-2xl font-bold text-accent flex items-center">
               <img src="/favicon.svg" alt="Galatea Logo" className="w-14 h-auto"/>
-              <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="text-foreground">
                 Galatea
               </span>
             </div>
@@ -53,7 +53,16 @@ export function Header() {
             >
               Blog
             </a>
-            <button className="bg-linear-to-r from-primary to-accent text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer button-shadow">
+            <button
+              onClick={() => {
+                const emailInput = document.getElementById('waitlist-email');
+                if (emailInput) {
+                  emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  setTimeout(() => emailInput.focus(), 500);
+                }
+              }}
+              className="bg-linear-to-r from-primary to-accent text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer button-shadow"
+            >
               Meet Yours
             </button>
 
@@ -113,7 +122,19 @@ export function Header() {
           >
             Blog
           </a>
-          <button onClick={() => setIsOpen(false)} className="bg-linear-to-r from-primary to-accent text-white font-semibold px-6 py-2 mt-8 rounded-full transition cursor-pointer button-shadow">
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              const emailInput = document.getElementById('waitlist-email');
+              if (emailInput) {
+                setTimeout(() => {
+                  emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  setTimeout(() => emailInput.focus(), 500);
+                }, 300);
+              }
+            }}
+            className="bg-linear-to-r from-primary to-accent text-white font-semibold px-6 py-2 mt-8 rounded-full transition cursor-pointer button-shadow"
+          >
             Meet Yours
           </button>
         </nav>
