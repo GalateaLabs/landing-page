@@ -3,32 +3,31 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Aura - Tu Compañera Virtual Inteligente",
+  title: "Galatea - Sentient by Design",
   description:
-    "Conversaciones significativas con inteligencia artificial. Apoyo 24/7, privacidad garantizada y conexiones genuinas. Prueba Aura gratis hoy.",
+    "Galatea is the first AI that exists between conversations. A companion who doesn't just respond, but feels, remembers, and evolves.",
   generator: "v0.app",
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/favicon-96x96.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/favicon-96x96.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "/icon.svg",
+        url: "/favicon.svg",
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -38,17 +37,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Analytics />
-        </ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        {children}
+        <Analytics />
       </body>
     </html>
   );
